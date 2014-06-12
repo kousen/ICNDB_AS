@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ICNDB</string>
+    <string name="hello_world">Internet Carlos Ray Database</string>
+    <string name="action_settings">Settings</string>
+    <string name="get_joke">Get Joke</string>
+    <string name="first_name">Xavier</string>
+    <string name="last_name">Ducrohet</string>
+
+</resources>
