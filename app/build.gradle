@@ -1,0 +1,49 @@
+apply plugin: 'android'
+
+repositories {
+    maven {
+        url 'http://repo.springsource.org/release'
+    }
+}
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.1.0"
+
+    packagingOptions {
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+    }
+
+    defaultConfig {
+        applicationId "com.nfjs.icndb.app"
+        minSdkVersion 15
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('ICNDB.keystore')
+            keyAlias 'ICNDB'
+            storePassword 'gradle_rules'
+            keyPassword 'carlos_ray_aka_chuck'
+        }
+    }
+
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
+    compile 'org.springframework.android:spring-android-core:1.0.1.RELEASE'
+    compile 'com.google.code.gson:gson:2.2.4'
+}
