@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
     private TextView jokeView;
     private RestTemplate template = new RestTemplate();
 
+
     private AsyncTask<String, Void, String> task;
 
     @Override
@@ -39,6 +40,16 @@ public class MainActivity extends Activity {
         });
 
         template.getMessageConverters().add(new GsonHttpMessageConverter());
+
+        if (savedInstanceState != null) {
+            jokeView.setText(savedInstanceState.getString("display"));
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("display", jokeView.getText().toString());
     }
 
     @Override
