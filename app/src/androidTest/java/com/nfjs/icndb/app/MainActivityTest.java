@@ -24,7 +24,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
     public void testJokeButton() {
         solo.clickOnButton("Get Joke");
-        assertTrue(solo.searchText("Champeau"));
+        assertTrue(solo.searchText("Schutta"));
     }
 
 }
