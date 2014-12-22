@@ -5,8 +5,8 @@ repositories {
 }
 
 android {
-    compileSdkVersion 20
-    buildToolsVersion '19.1.0'
+    compileSdkVersion 21
+    buildToolsVersion '21.1.2'
     packagingOptions {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/license.txt'
@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId 'com.nfjs.icndb.app'
         minSdkVersion 15
-        targetSdkVersion 20
+        targetSdkVersion 21
         versionCode 1
         versionName '1.0'
     }
@@ -28,7 +28,7 @@ android {
     }
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -45,6 +45,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'org.springframework.android:spring-android-core:1.0.1.RELEASE'
-    compile 'com.google.code.gson:gson:2.2.4'
-    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.1'
+    compile 'com.google.code.gson:gson:2.3'
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1'
 }
