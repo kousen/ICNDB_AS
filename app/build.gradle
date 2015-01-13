@@ -37,14 +37,12 @@ android {
             versionNameSuffix '-debug'
         }
     }
-    productFlavors {
-    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1'
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'org.springframework.android:spring-android-core:1.0.1.RELEASE'
     compile 'com.google.code.gson:gson:2.3'
-    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1'
 }
