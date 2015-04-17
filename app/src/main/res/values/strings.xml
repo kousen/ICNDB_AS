@@ -8,4 +8,7 @@
     <string name="first_name" translatable="false">Xavier</string>
     <string name="last_name" translatable="false">Ducrohet</string>
 
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="settings">Settings</string>
+
 </resources>

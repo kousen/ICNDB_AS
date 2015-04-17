@@ -1,8 +1,11 @@
 package com.nfjs.icndb.app;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,12 +33,13 @@ public class MainActivity extends Activity {
 
         jokeView = (TextView) findViewById(R.id.text_view);
         Button jokeButton = (Button) findViewById(R.id.icndb_button);
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         jokeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 task = new JokeTask().execute(
-                        getString(R.string.first_name),
-                        getString(R.string.last_name));
+                        prefs.getString("first", "Hans"),
+                        prefs.getString("last", "Dockter"));
             }
         });
 
@@ -72,9 +76,14 @@ public class MainActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.action_joke:
+                final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                 task = new JokeTask().execute(
-                        getString(R.string.first_name),
-                        getString(R.string.last_name));
+                        prefs.getString("first", "Hans"),
+                        prefs.getString("last", "Dockter"));
+                return true;
+            case R.id.preferences:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
