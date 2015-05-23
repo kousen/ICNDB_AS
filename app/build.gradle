@@ -10,6 +10,7 @@ android {
     packagingOptions {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/license.txt'
+        exclude 'LICENSE.txt'
     }
     defaultConfig {
         applicationId 'com.nfjs.icndb.app'
@@ -42,6 +43,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.3.1'
+    androidTestCompile 'junit:junit:4.11'
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'org.springframework.android:spring-android-core:1.0.1.RELEASE'
     compile 'com.google.code.gson:gson:2.3'
