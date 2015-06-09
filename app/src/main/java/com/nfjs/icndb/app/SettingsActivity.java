@@ -14,6 +14,8 @@ public class SettingsActivity extends Activity {
                 .replace(android.R.id.content, new PrefsFragment())
                 .commit();
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getActionBar() != null) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 }
