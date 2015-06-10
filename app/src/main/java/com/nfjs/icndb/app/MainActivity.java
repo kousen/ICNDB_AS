@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +22,7 @@ public class MainActivity extends Activity {
     private static final String URL = "http://api.icndb.com/jokes/random?" +
             "limitTo=[nerdy]&firstName={first}&lastName={last}";
 
+    private boolean running;
     private TextView jokeView;
     private RestTemplate template = new RestTemplate();
     private ShareActionProvider shareActionProvider;
@@ -33,14 +35,31 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         jokeView = (TextView) findViewById(R.id.text_view);
-        Button jokeButton = (Button) findViewById(R.id.icndb_button);
+        final Button jokeButton = (Button) findViewById(R.id.icndb_button);
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         jokeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                task = new JokeTask().execute(
-                        prefs.getString("first", "Hans"),
-                        prefs.getString("last", "Dockter"));
+                running = !running;
+                final Handler handler = new Handler();
+                handler.post(
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                task = new JokeTask().execute(
+                                        prefs.getString("first", "Hans"),
+                                        prefs.getString("last", "Dockter"));
+                                if (running) {
+                                    jokeButton.setTextColor(
+                                            getResources().getColor(android.R.color.holo_red_dark));
+                                    handler.postDelayed(this, 3000);
+                                } else {
+                                    jokeButton.setTextColor(
+                                            getResources().getColor(android.R.color.black));
+                                }
+                            }
+                        }
+                );
             }
         });
 
