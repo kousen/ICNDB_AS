@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
@@ -22,7 +23,7 @@ public class MainActivity extends Activity {
 
     private TextView jokeView;
     private RestTemplate template = new RestTemplate();
-
+    private ShareActionProvider shareActionProvider;
 
     private AsyncTask<String, Void, String> task;
 
@@ -66,7 +67,16 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem item = menu.findItem(R.id.action_share);
+        shareActionProvider = (ShareActionProvider) item.getActionProvider();
         return true;
+    }
+
+    private void setIntent(String text) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        shareActionProvider.setShareIntent(intent);
     }
 
     @Override
@@ -101,6 +111,7 @@ public class MainActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             jokeView.setText(result);
+            setIntent(result);
         }
     }
 }
