@@ -54,4 +54,6 @@ dependencies {
     // Testing-only dependencies
     androidTestCompile 'com.android.support.test:runner:0.3'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
+
+    testCompile 'junit:junit:4.12'
 }
