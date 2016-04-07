@@ -14,20 +14,29 @@ import android.widget.Button;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
-import org.springframework.http.converter.json.GsonHttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
+import java.io.IOException;
 
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public class MainActivity extends Activity {
-    private static final String URL = "http://api.icndb.com/jokes/random?" +
-            "limitTo=[nerdy]&firstName={first}&lastName={last}";
-
-    private boolean running;
     private TextView jokeView;
-    private RestTemplate template = new RestTemplate();
+
+    private Retrofit retrofit;
+
     private ShareActionProvider shareActionProvider;
 
     private AsyncTask<String, Void, String> task;
+
+    public interface ICNDB {
+        @GET("/jokes/random")
+        Call<IcndbJoke> getJoke(@Query("firstName") String firstName,
+                                @Query("lastName") String lastName,
+                                @Query("limitTo") String limitTo);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,30 +49,16 @@ public class MainActivity extends Activity {
         jokeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                running = !running;
-                final Handler handler = new Handler();
-                handler.post(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                task = new JokeTask().execute(
-                                        prefs.getString("first", "Hans"),
-                                        prefs.getString("last", "Dockter"));
-                                if (running) {
-                                    jokeButton.setTextColor(
-                                            getResources().getColor(android.R.color.holo_red_dark));
-                                    handler.postDelayed(this, 3000);
-                                } else {
-                                    jokeButton.setTextColor(
-                                            getResources().getColor(android.R.color.black));
-                                }
-                            }
-                        }
-                );
+                task = new JokeTask().execute(
+                        prefs.getString("first", "Hans"),
+                        prefs.getString("last", "Dockter"));
             }
         });
 
-        template.getMessageConverters().add(new GsonHttpMessageConverter());
+        retrofit = new Retrofit.Builder()
+                .baseUrl("http://api.icndb.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
         if (savedInstanceState != null) {
             jokeView.setText(savedInstanceState.getString("display"));
@@ -122,9 +117,15 @@ public class MainActivity extends Activity {
     private class JokeTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
-            IcndbJoke joke = template.getForObject(URL, IcndbJoke.class,
-                    params[0], params[1]);
-            return joke.getJoke();
+            ICNDB icndb = retrofit.create(ICNDB.class);
+            Call<IcndbJoke> icndbJoke = icndb.getJoke(params[0], params[1], "[nerdy]");
+            String joke = "";
+            try {
+                joke = icndbJoke.execute().body().getJoke();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return joke;
         }
 
         @Override
