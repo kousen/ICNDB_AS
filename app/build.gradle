@@ -41,6 +41,10 @@ android {
             versionNameSuffix '-debug'
         }
     }
+
+    lintOptions {
+        warning 'InvalidPackage'
+    }
 }
 
 dependencies {
