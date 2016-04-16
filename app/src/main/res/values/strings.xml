@@ -3,7 +3,6 @@
 
     <string name="app_name">ICNDB</string>
     <string name="hello_world">Internet Carlos Ray Database</string>
-    <string name="action_settings">Settings</string>
     <string name="get_joke">Get Joke</string>
     <string name="first_name" translatable="false">Hans</string>
     <string name="last_name" translatable="false">Dockter</string>
