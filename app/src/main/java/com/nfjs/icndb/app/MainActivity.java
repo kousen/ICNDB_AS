@@ -110,28 +110,24 @@ public class MainActivity extends Activity {
             case R.id.joke_no_async:
                 ICNDB icndb = retrofit.create(ICNDB.class);
                 Call<IcndbJoke> icndbJoke = icndb.getJoke("Nik", "Kosse", "[nerdy]");
-                String joke = "not funny";
-                try {
-                    joke = icndbJoke.enqueue(new Callback<ICNDB>() {
-                        @Override
-                        public void onResponse(Call<ICNDB> call, Response<ICNDB> response) {
-                            if (response.isSuccessful()) {
-                                // tasks available
-                            } else {
-                                // error response, no access to resource?
-                            }
-                        }
 
-                        @Override
-                        public void onFailure(Call<ICNDB> call, Throwable t) {
-                            // something went completely south (like no internet connection)
-                            Log.d("Error", t.getMessage());
+                icndbJoke.enqueue(new Callback<IcndbJoke>() {
+                    @Override
+                    public void onResponse(Call<IcndbJoke> call, Response<IcndbJoke> response) {
+                        if (response.isSuccessful()) {
+                            jokeView.setText(response.body().getJoke());
+                        } else {
+                            jokeView.setText("not funny");
                         }
-                    });
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                jokeView.setText(joke);
+                    }
+
+                    @Override
+                    public void onFailure(Call<IcndbJoke> call, Throwable t) {
+                        Log.d("Error", t.getMessage());
+                    }
+                });
+
+                return true;
             case R.id.preferences:
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
