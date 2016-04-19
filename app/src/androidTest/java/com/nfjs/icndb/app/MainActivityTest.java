@@ -1,5 +1,8 @@
 package com.nfjs.icndb.app;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
@@ -24,9 +27,12 @@ public class MainActivityTest {
 
     @Test
     public void jokeButtonUsesHeroName() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+                InstrumentationRegistry.getTargetContext());
         onView(withId(R.id.icndb_button))
                 .perform(click());
         onView(withId(R.id.text_view))
-                .check(matches(withText(containsString("Hans"))));
+                .check(matches(withText(containsString(
+                        prefs.getString("first", "Hans")))));
     }
 }
