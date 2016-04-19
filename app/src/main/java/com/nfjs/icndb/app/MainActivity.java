@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +17,8 @@ import android.widget.TextView;
 import java.io.IOException;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
@@ -105,6 +107,31 @@ public class MainActivity extends Activity {
                         prefs.getString("first", "Hans"),
                         prefs.getString("last", "Dockter"));
                 return true;
+            case R.id.joke_no_async:
+                ICNDB icndb = retrofit.create(ICNDB.class);
+                Call<IcndbJoke> icndbJoke = icndb.getJoke("Nik", "Kosse", "[nerdy]");
+                String joke = "not funny";
+                try {
+                    joke = icndbJoke.enqueue(new Callback<ICNDB>() {
+                        @Override
+                        public void onResponse(Call<ICNDB> call, Response<ICNDB> response) {
+                            if (response.isSuccessful()) {
+                                // tasks available
+                            } else {
+                                // error response, no access to resource?
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ICNDB> call, Throwable t) {
+                            // something went completely south (like no internet connection)
+                            Log.d("Error", t.getMessage());
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                jokeView.setText(joke);
             case R.id.preferences:
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);

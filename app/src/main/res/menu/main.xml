@@ -7,6 +7,11 @@
         android:icon="@android:drawable/ic_media_play"
         android:title="@string/get_joke"/>
     <item
+        android:id="@+id/joke_no_async"
+        android:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="@string/get_other_joke"/>
+    <item
         android:title="@string/action_share"
         android:id="@+id/action_share"
         android:showAsAction="ifRoom"
