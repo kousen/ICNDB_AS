@@ -100,16 +100,18 @@ public class MainActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         switch (item.getItemId()) {
             case R.id.action_joke:
-                final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                 task = new JokeTask().execute(
                         prefs.getString("first", "Hans"),
                         prefs.getString("last", "Dockter"));
                 return true;
             case R.id.joke_no_async:
                 ICNDB icndb = retrofit.create(ICNDB.class);
-                Call<IcndbJoke> icndbJoke = icndb.getJoke("Nik", "Kosse", "[nerdy]");
+                Call<IcndbJoke> icndbJoke = icndb.getJoke(
+                        prefs.getString("first", "Tim"),
+                        prefs.getString("last", "O'Reilly"), "[nerdy]");
 
                 icndbJoke.enqueue(new Callback<IcndbJoke>() {
                     @Override
