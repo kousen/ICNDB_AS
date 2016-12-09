@@ -11,5 +11,6 @@
     <string name="settings">Settings</string>
     <string name="action_share">Share</string>
     <string name="get_other_joke">Get Other Joke</string>
+    <string name="not_funny">not funny</string>
 
 </resources>

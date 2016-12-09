@@ -119,7 +119,7 @@ public class MainActivity extends Activity {
                         if (response.isSuccessful()) {
                             jokeView.setText(response.body().getJoke());
                         } else {
-                            jokeView.setText("not funny");
+                            jokeView.setText(R.string.not_funny);
                         }
                     }
 
