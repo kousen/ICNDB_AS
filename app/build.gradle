@@ -5,8 +5,8 @@ repositories {
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.3'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.0'
 
     packagingOptions {
         exclude 'META-INF/notice.txt'
@@ -16,7 +16,7 @@ android {
     defaultConfig {
         applicationId 'com.nfjs.icndb.app'
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 26
         versionCode 1
         versionName '1.0'
 
