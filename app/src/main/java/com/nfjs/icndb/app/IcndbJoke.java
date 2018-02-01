@@ -2,7 +2,7 @@ package com.nfjs.icndb.app;
 
 public class IcndbJoke {
     private String type;
-    private Joke value;
+    private JsonJoke value;
 
     public String getJoke() {
         return value.getJoke();
@@ -16,15 +16,15 @@ public class IcndbJoke {
         this.type = type;
     }
 
-    public Joke getValue() {
+    public JsonJoke getValue() {
         return value;
     }
 
-    public void setValue(Joke value) {
+    public void setValue(JsonJoke value) {
         this.value = value;
     }
 
-    private static class Joke {
+    private static class JsonJoke {
         private int id;
         private String joke;
         private String[] categories;
