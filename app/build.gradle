@@ -6,7 +6,7 @@ repositories {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.0'
+
     packagingOptions {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/license.txt'
@@ -41,10 +41,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.3.1'
-    androidTestCompile 'junit:junit:4.11'
-    compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
-    compile 'org.springframework.android:spring-android-core:1.0.1.RELEASE'
-    compile 'com.google.code.gson:gson:2.4'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation 'com.jayway.android.robotium:robotium-solo:5.5.4'
+    androidTestImplementation 'junit:junit:4.12'
+    implementation 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
+    implementation 'org.springframework.android:spring-android-core:1.0.1.RELEASE'
+    implementation 'com.google.code.gson:gson:2.8.4'
 }
