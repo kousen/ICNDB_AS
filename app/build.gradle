@@ -5,8 +5,8 @@ repositories {
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.3'
+    compileSdkVersion 27
+
     packagingOptions {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/license.txt'
@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId 'com.nfjs.icndb.app'
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 27
         versionCode 1
         versionName '1.0'
 
@@ -43,13 +43,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
-    compile 'com.google.code.gson:gson:2.6.2'
-    compile 'com.android.support:support-annotations:23.3.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
+    implementation 'com.google.code.gson:gson:2.8.4'
+    implementation 'com.android.support:support-annotations:27.1.1'
 
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 }
