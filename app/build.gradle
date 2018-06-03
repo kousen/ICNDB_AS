@@ -5,8 +5,8 @@ repositories {
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    compileSdkVersion 27
+
     packagingOptions {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/license.txt'
@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId 'com.nfjs.icndb.app'
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 27
         versionCode 1
         versionName '1.0'
     }
@@ -41,10 +41,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.3.1'
-    androidTestCompile 'junit:junit:4.11'
-    compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
-    compile 'org.springframework.android:spring-android-core:1.0.1.RELEASE'
-    compile 'com.google.code.gson:gson:2.4'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation 'com.jayway.android.robotium:robotium-solo:5.5.4'
+    androidTestImplementation 'junit:junit:4.12'
+    implementation 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
+    implementation 'org.springframework.android:spring-android-core:1.0.1.RELEASE'
+    implementation 'com.google.code.gson:gson:2.8.4'
 }
