@@ -1,9 +1,5 @@
 apply plugin: 'com.android.application'
 
-repositories {
-    maven { url 'http://repo.springsource.org/release' }
-}
-
 android {
     compileSdkVersion 28
 
